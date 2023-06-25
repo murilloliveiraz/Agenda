@@ -1,4 +1,3 @@
-const { async } = require('regenerator-runtime');
 const Contato = require('../models/ContatoModel');
 
 exports.index = async (req, res) => { 

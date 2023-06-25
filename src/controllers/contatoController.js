@@ -1,5 +1,4 @@
-const { async } = require('regenerator-runtime');
-const Contato = require('../models/ContatoModel')
+const Contato = require('../models/ContatoModel');
 
 exports.index = (req,res) => {
     res.render('contato', {
@@ -14,11 +13,11 @@ exports.register = async (req, res) => {
 
     if(contato.errors.length > 0){
         req.flash('errors', contato.errors);
-        req.session.save(() => res.redirect('back'))
+        req.session.save(() => res.redirect('back'));
         return;
     }
 
-    req.flash('success', 'Contato registado.');
+    req.flash('success', 'Contato registado com sucesso.');
     req.session.save(() => res.redirect(`/contato/index/${contato.contato._id}`));
     return;
     } catch(e){
@@ -32,6 +31,7 @@ exports.editIndex = async function(req,res){
 
     const contato = await Contato.buscaPorId(req.params.id);
     if(!contato) return res.render('404');
+
     res.render('contato', { contato });
 };
 
@@ -43,11 +43,11 @@ exports.edit = async function(req, res){
     
         if(contato.errors.length > 0){
             req.flash('errors', contato.errors);
-            req.session.save(() => res.redirect('back'))
+            req.session.save(() => res.redirect('back'));
             return;
         }
     
-        req.flash('success', 'Contato editado.');
+        req.flash('success', 'Contato editado com sucesso.');
         req.session.save(() => res.redirect(`/contato/index/${contato.contato._id}`));
         return;
     } catch(e){
@@ -62,7 +62,7 @@ exports.delete = async function(req,res){
     const contato = await Contato.delete(req.params.id);
     if(!contato) return res.render('404');
     
-    req.flash('success', 'Contato apagado');
+    req.flash('success', 'Contato apagado com sucesso');
         req.session.save(() => res.redirect('back'));
     return;
 };

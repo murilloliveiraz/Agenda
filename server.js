@@ -8,11 +8,9 @@ const app = express();
 const mongoose = require('mongoose');
 mongoose.connect(process.env.CONNECTIONSTRING, { 
     useNewUrlParser: true,
-     useUnifiedTopology: true,
-     useFindAndModify: false
+     useUnifiedTopology: true
     })
     .then(() => {
-        console.log('Conectei a base de dados');
         app.emit('Pronto');
     })
     .catch(e => console.log(e));
@@ -32,17 +30,11 @@ const routes = require('./routes')
 //caminhos
 const path = require('path');
 
-//seguranca do express
-const helmet = require('helmet');
-
 // tokens de formulario
 const csrf = require('csurf');
 
 // Middlewares 
 const {middlewareGlobal, checkCsrfError, csrfMiddleware} = require('./src/middlewares/middleware');
-
-// o app vai usar o helmet
-app.use(helmet());
 
 // permite postar formularios
 app.use(express.urlencoded({extended:true}));

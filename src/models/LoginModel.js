@@ -52,7 +52,7 @@ class Login {
 
     async userExists(){
         this.user = await LoginModel.findOne({email: this.body.email});
-        if(this.user) this.errors.push('Usuário já existe')
+        if(this.user) this.errors.push('Usuário já existe');
     }
 
     valida(){
@@ -66,16 +66,16 @@ class Login {
     }
 
     cleanUp(){
-        for(const key in this.body){
-           if(typeof this.body[key] !== 'string'){
-                this.body[key] = '';
-           }
-        }
-
-        this.body = {
+        for(const key in this.body) {
+            if(typeof this.body[key] !== 'string') {
+              this.body[key] = '';
+            }
+          }
+      
+          this.body = {
             email: this.body.email,
             password: this.body.password
-        };
+          };
     }
 }
 
