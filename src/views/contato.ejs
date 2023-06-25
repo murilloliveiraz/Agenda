@@ -11,10 +11,11 @@
 
             <%- include('includes/messages')%>
 
-            <div class="col-lg">
-                <h4>Cadastrar-se</h4>
-                <p>Se você ainda não tem uma conta preencha o formulário abaixo:</p>
+            <% if(contato._id) { %>
+              <form action="/contato/edit/<%= contato._id%>" method="post">
+            <%} else {%>
                 <form action="/contato/register" method="post">
+            <% } %>
                     <input type="hidden" name="_csrf" value="<%= csrfToken%>">
                     <div class="mb-3">
                       <label class="form-label">Nome : </label>
@@ -36,7 +37,6 @@
 
                     <button type="submit" class="btn btn-primary">Criar Contato</button>
                   </form>
-            </div>
             
         </div>
 
